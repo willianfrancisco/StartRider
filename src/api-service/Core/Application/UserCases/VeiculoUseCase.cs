@@ -82,8 +82,13 @@ public class VeiculoUseCase(
     {
         try
         {
-            var mensagem = JsonConvert.SerializeObject(veiculoDto);
-            await _publishService.PublicaMensagemRabbitMqAsync(mensagem);
+            var placaJaCadastrada = await PlacaCadastrada(veiculoDto.Placa);
+
+            if (!placaJaCadastrada)
+            {
+                var mensagem = JsonConvert.SerializeObject(veiculoDto);
+                await _publishService.PublicaMensagemRabbitMqAsync(mensagem);   
+            }
         }
         catch (Exception ex)
         {
@@ -104,6 +109,28 @@ public class VeiculoUseCase(
         catch (Exception ex)
         {
             _logger.LogError($"Ocorreu um erro ao tentar deletar um veiculo, mensagem: {ex.Message} ");
+            throw;
+        }
+    }
+
+    private async Task<bool> PlacaCadastrada(string placa)
+    {
+        try
+        {
+            bool existeCadastro = false;
+            var veiculo = await _veiculoRepository.RecuperaVeiculoPorPlacaAsync(placa);
+
+            if (veiculo != null)
+            {
+                existeCadastro = true;
+                _logger.LogWarning($"Placa: {placa} já esta cadastrada no sistema.");
+            }
+
+            return existeCadastro;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Ocorreu um erro ao tentar verificar se a placa já esta cadastrada, mensagem:{ex.Message}");
             throw;
         }
     }
