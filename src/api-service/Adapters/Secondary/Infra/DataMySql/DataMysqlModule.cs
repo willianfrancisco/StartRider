@@ -1,3 +1,4 @@
+using DataMySql.LocacaoRepository;
 using DataMySql.LocatarioRepository;
 using DataMySql.VeiculoRepository;
 using Domain.Ports;
@@ -11,6 +12,7 @@ public static class DataMysqlModule
      {
           services.AddScoped<IVeiculoRepositoryPort, VeiculoRepositoryPort>();
           services.AddScoped<ILocatarioRepositoryPort, LocatarioRepositoryPort>();
+          services.AddScoped<ILocacaoRepositoryPort, LocacaoRepositoryPort>();
           return services;
      }
 }

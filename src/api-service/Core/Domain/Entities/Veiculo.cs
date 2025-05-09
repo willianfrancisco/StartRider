@@ -29,7 +29,8 @@ public class Veiculo
     public string AnoFabricacaoModelo { get; private set; } = "";
     public string? Cor { get; private set; }
     public string UltimoLicenciamento { get; private set; } = "";
-    
+    [JsonIgnore]
+    public Locacao Locacao { get; set; }
 
     public void AlteraNumeroRenavam(string numeroRenavam) => this.NumeroRenavam = numeroRenavam;
 

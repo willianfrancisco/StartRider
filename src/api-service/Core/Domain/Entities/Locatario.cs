@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Domain.Enums;
 
 namespace Domain.Entities;
@@ -41,6 +42,8 @@ public class Locatario
     public DateOnly DataValidade { get; private set; }
     public ECategoriaCnh CategoriaCnh { get; private set; }
     public string FotoCnh { get; private set; } = "";
+    [JsonIgnore]
+    public Locacao Locacao { get; set; }
 
     public void AtualizaFotoCnh(string novaFotoCnh)
     {
