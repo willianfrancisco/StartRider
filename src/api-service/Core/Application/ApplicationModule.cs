@@ -9,6 +9,7 @@ public static class ApplicationModule
     public static IServiceCollection AdicionaDependenciasApplications(this IServiceCollection service)
     {
         service.AddScoped<IVeiculoUseCase,VeiculoUseCase>();
+        service.AddScoped<ILocatarioUseCase, LocatarioUseCase>();
         return service;
     }
 }

@@ -1,3 +1,4 @@
+using DataMySql.LocatarioRepository;
 using DataMySql.VeiculoRepository;
 using Domain.Ports;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ public static class DataMysqlModule
      public static IServiceCollection AdicionaDependenciasInfraDataMysql(this IServiceCollection services)
      {
           services.AddScoped<IVeiculoRepositoryPort, VeiculoRepositoryPort>();
+          services.AddScoped<ILocatarioRepositoryPort, LocatarioRepositoryPort>();
           return services;
      }
 }

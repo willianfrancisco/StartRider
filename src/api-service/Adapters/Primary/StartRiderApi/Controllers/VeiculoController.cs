@@ -1,3 +1,4 @@
+using System.Net;
 using Application.DTOs;
 using Application.Ports;
 using Domain.Entities;
@@ -14,12 +15,23 @@ namespace StartRiderApi.Controllers
         ISerilogLoggerService _logger
         ) : ControllerBase
     {
+        /// <summary>
+        /// Consulta todos os veículos cadastrados na base de dados.
+        /// </summary>
+        /// <returns>Uma lista de veículos</returns>
+        [ProducesResponseType(typeof(List<LerVeiculoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         public async Task<IActionResult> RetornarTodosOsVeiculosAsync()
         {
             try
             {
                 var veiculos = await _veiculoUseCase.ListarTodosOsVeiculosCadastradosAsync();
+                
+                if(veiculos == null)
+                    return NotFound();
+                
                 return Ok(veiculos);
             }
             catch (Exception ex)
@@ -29,12 +41,24 @@ namespace StartRiderApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Consulta veículo na base buscando pelo Id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Veículo com o id especificado</returns>
+        [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{id}")]
         public async Task<IActionResult> RetornarVeiculoConsultandoPorId([FromRoute] int id)
         {
             try
             {
                 var veiculo = await _veiculoUseCase.RecuperaVeiculoPorIdAsync(id);
+                
+                if(veiculo == null)
+                    return NotFound();
+                
                 return Ok(veiculo);
             }
             catch (Exception ex)
@@ -44,12 +68,24 @@ namespace StartRiderApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Consulta veículo na base buscando pela placa. 
+        /// </summary>
+        /// <param name="placa"></param>
+        /// <returns>Veículo com o placa especificado</returns>
+        [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> RetornarVeiculoConsultandoPorPlaca([FromRoute] string placa)
         {
             try
             {
                 var veiculo = await _veiculoUseCase.RecuperaVeiculoPelaPlacaAsync(placa);
+                
+                if(veiculo == null)
+                    return NotFound();
+                
                 return Ok(veiculo);
             }
             catch (Exception ex)
@@ -59,6 +95,13 @@ namespace StartRiderApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Cadastra um veículo novo na base de dados.
+        /// </summary>
+        /// <param name="veiculo"></param>
+        /// <returns>Retorna status 201 Created</returns>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> CadastrarNovoVeiculoAsync([FromBody]NovoVeiculoDto veiculo)
         {
@@ -74,6 +117,14 @@ namespace StartRiderApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados da placa, numeroRenavam,cor e modelo na base de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="veiculo"></param>
+        /// <returns>Retorna status 204 NoContent</returns>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarDadosVeiculoAsync([FromRoute]int id, [FromBody]AtualizaVeiculoDto veiculo)
         {
@@ -89,6 +140,13 @@ namespace StartRiderApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Deleta um veículo da base de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna status 204 NoContent</returns>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarVeiculoCadastradoAsync([FromRoute] int id)
         {

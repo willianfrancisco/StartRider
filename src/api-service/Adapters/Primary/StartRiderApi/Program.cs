@@ -14,7 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    var xmlFilename = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+    opt.IncludeXmlComments(xmlPath);
+});
 string connectionString = builder.Configuration.GetConnectionString("StartRiderDbConnectionString") ?? "server=172.17.0.2;database=StartRiderDb;user=root;password=123456;";
 builder.Services.AddDbContext<StartRiderContext>(opt => 
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
