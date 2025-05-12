@@ -12,7 +12,7 @@ public class PublishService(
     {
         try
         {
-            var factory = new ConnectionFactory{HostName = "localhost"};
+            var factory = new ConnectionFactory{HostName = "rabbitmq-startrider"};
             await using var connection =  await factory.CreateConnectionAsync();
             await using var chanel = await connection.CreateChannelAsync();
 

@@ -13,6 +13,14 @@ namespace StartRiderApi.Controllers
         ISerilogLoggerService  _logger
         ) : ControllerBase
     {
+        /// <summary>
+        /// Realiza o cadastro do usuário com as roles para gerar o token
+        /// </summary>
+        /// <param name="usuarioDto"></param>
+        /// <returns>Status 204 Created</returns>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         public async Task<IActionResult> CadastrarNovoUsuarioAsync([FromBody] NovoUsuarioDto usuarioDto)
         {

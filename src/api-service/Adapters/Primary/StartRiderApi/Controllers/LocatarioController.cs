@@ -23,6 +23,7 @@ namespace StartRiderApi.Controllers
         [Authorize(Roles = "Admin,Usuario")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         public async Task<IActionResult> CadastrarNovoLocatarioAsync([FromBody]NovoLocatarioDto novoLocatario)
         {
@@ -47,6 +48,7 @@ namespace StartRiderApi.Controllers
         [Authorize(Roles = "Admin,Usuario")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarFotoCnhLocatarioAsync([FromRoute] int id, [FromBody] AtualizaFotoCnhLocatarioDto atualizaFotoCnhLocatarioDto)
         {

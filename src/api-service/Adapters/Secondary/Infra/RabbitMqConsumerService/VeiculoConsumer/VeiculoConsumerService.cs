@@ -27,7 +27,7 @@ public class VeiculoConsumerService : BackgroundService
         using var scope = _scopeFactory.CreateScope();
         var logger = scope.ServiceProvider.GetRequiredService<ISerilogLoggerService>();
 
-            var factory = new ConnectionFactory(){HostName = "localhost"};
+            var factory = new ConnectionFactory(){HostName = "rabbitmq-startrider"};
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
             

@@ -13,6 +13,11 @@ namespace StartRiderApi.Controllers
         ISerilogLoggerService _logger
         ) : ControllerBase
     {
+        /// <summary>
+        /// Gera o token para acesso aos metodos.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>Token</returns>
         [HttpPost("gerar-token")]
         public async Task<IActionResult> GerarToken([FromBody] SolicitarTokenDto usuario)
         {

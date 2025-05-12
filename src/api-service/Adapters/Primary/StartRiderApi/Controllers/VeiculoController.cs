@@ -24,6 +24,7 @@ namespace StartRiderApi.Controllers
         [ProducesResponseType(typeof(List<LerVeiculoDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
         public async Task<IActionResult> RetornarTodosOsVeiculosAsync()
         {
@@ -52,6 +53,7 @@ namespace StartRiderApi.Controllers
         [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("id/{id}")]
         public async Task<IActionResult> RetornarVeiculoConsultandoPorId([FromRoute] int id)
         {
@@ -80,6 +82,7 @@ namespace StartRiderApi.Controllers
         [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> RetornarVeiculoConsultandoPorPlaca([FromRoute] string placa)
         {
@@ -107,6 +110,7 @@ namespace StartRiderApi.Controllers
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         public async Task<IActionResult> CadastrarNovoVeiculoAsync([FromBody]NovoVeiculoDto veiculo)
         {
@@ -131,6 +135,7 @@ namespace StartRiderApi.Controllers
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarDadosVeiculoAsync([FromRoute]int id, [FromBody]AtualizaVeiculoDto veiculo)
         {
@@ -154,6 +159,7 @@ namespace StartRiderApi.Controllers
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarVeiculoCadastradoAsync([FromRoute] int id)
         {

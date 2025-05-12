@@ -1,0 +1,30 @@
+# Ignora arquivos de build
+bin/
+obj/
+
+# Ignora diretórios de publicação locais
+out/
+publish/
+
+# Ignora arquivos de usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignora arquivos temporários
+*.log
+*.tmp
+*.temp
+# Ignora arquivos do Rider
+.idea/
+
+# Ignora pacotes baixados
+**/packages/
+*.nupkg
+
+# Ignora arquivos de configuração locais
+appsettings.Development.json
+
+# Ignora diretórios de cache
+node_modules/
