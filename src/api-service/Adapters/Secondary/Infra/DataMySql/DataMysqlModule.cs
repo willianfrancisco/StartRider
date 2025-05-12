@@ -1,5 +1,6 @@
 using DataMySql.LocacaoRepository;
 using DataMySql.LocatarioRepository;
+using DataMySql.UsuarioRepository;
 using DataMySql.VeiculoRepository;
 using Domain.Ports;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ public static class DataMysqlModule
           services.AddScoped<IVeiculoRepositoryPort, VeiculoRepositoryPort>();
           services.AddScoped<ILocatarioRepositoryPort, LocatarioRepositoryPort>();
           services.AddScoped<ILocacaoRepositoryPort, LocacaoRepositoryPort>();
+          services.AddScoped<IUsuarioRepositoryPort, UsuarioRepositoryPort>();
           return services;
      }
 }

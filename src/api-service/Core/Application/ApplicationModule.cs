@@ -11,6 +11,8 @@ public static class ApplicationModule
         service.AddScoped<IVeiculoUseCase,VeiculoUseCase>();
         service.AddScoped<ILocatarioUseCase, LocatarioUseCase>();
         service.AddScoped<ILocacaoUseCase, LocacaoUseCase>();
+        service.AddTransient<ITokenUseCase, TokenUseCase>();
+        service.AddTransient<IUsuarioUseCase, UsuarioUseCase>();
         return service;
     }
 }

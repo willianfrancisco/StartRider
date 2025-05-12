@@ -8,6 +8,7 @@ public class StartRiderContext(DbContextOptions<StartRiderContext> optionsBuilde
     public DbSet<Veiculo> Veiculos { get; set; }
     public DbSet<Locatario> Locatarios { get; set; }
     public DbSet<Locacao> Locacoes { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -3,6 +3,7 @@ using Application.DTOs;
 using Application.Ports;
 using Domain.Entities;
 using Domain.Ports;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace StartRiderApi.Controllers
         /// Consulta todos os veículos cadastrados na base de dados.
         /// </summary>
         /// <returns>Uma lista de veículos</returns>
+        [Authorize(Roles = "Admin,Usuario")]
         [ProducesResponseType(typeof(List<LerVeiculoDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,6 +48,7 @@ namespace StartRiderApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Veículo com o id especificado</returns>
+        [Authorize(Roles = "Admin,Usuario")]
         [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -73,6 +76,7 @@ namespace StartRiderApi.Controllers
         /// </summary>
         /// <param name="placa"></param>
         /// <returns>Veículo com o placa especificado</returns>
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(LerVeiculoDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -100,6 +104,7 @@ namespace StartRiderApi.Controllers
         /// </summary>
         /// <param name="veiculo"></param>
         /// <returns>Retorna status 201 Created</returns>
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
@@ -123,6 +128,7 @@ namespace StartRiderApi.Controllers
         /// <param name="id"></param>
         /// <param name="veiculo"></param>
         /// <returns>Retorna status 204 NoContent</returns>
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("{id}")]
@@ -145,6 +151,7 @@ namespace StartRiderApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Retorna status 204 NoContent</returns>
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id}")]
