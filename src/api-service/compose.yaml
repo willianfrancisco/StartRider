@@ -29,6 +29,11 @@ services:
     restart: always
     networks:
       - private-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-p=root" ]
+      interval: 15s
+      timeout: 30s
+      retries: 5
   
   rabbitmq:
     image: rabbitmq:4.0-management
