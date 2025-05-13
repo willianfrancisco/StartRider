@@ -67,7 +67,7 @@ public class LocacaoUseCase(
     {
         bool possuiCadastro = false;
         
-        var locatario = await _locaoRepository.RecuperaLocacaoPorIdAsync(locatarioId);
+        var locatario = await _locatarioRepository.RecuperaLocatarioPorIdAsync(locatarioId);
         var veiculo = await _veiculoRepository.RecuperaVeiculoPorIdAsync(veiculoId);
         
         if(locatario == null)
